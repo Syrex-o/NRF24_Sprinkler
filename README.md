@@ -8,10 +8,11 @@ NRF24 communication for RPi (FHEM Sprinkler)
 4. sudo apt-get install python3-rpi.gpio -y
 5. wget https://github.com/Gadgetoid/py-spidev/archive/master.zip
 6. unzip master.zip
-7. unzip master.zip
+7. rm master.zip
 8. cd ./py-spidev-master
 9. sudo python3 setup.py install
-10. git clone https://github.com/Syrex-o/NRF24_Sprinkler
+10. sudo rm -r py-spidev-master
+11. git clone https://github.com/Syrex-o/NRF24_Sprinkler
 
 ---
 
