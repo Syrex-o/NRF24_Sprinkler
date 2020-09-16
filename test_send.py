@@ -39,6 +39,7 @@ total_tries = 100
 listen_tries = 10
 
 received_counter = 0
+timeout_counter = 0
 
 # start test
 for i in range(total_tries):
@@ -62,6 +63,7 @@ for i in range(total_tries):
                                 timeout = True
                 if timeout:
                         print("No response received")
+                        timeout_counter += 1
                         radio.stopListening()
                 else:
                         # response received
@@ -78,4 +80,6 @@ for i in range(total_tries):
 
 print("----------Test Results:----------")
 p = str((received_counter / total_tries) * 100) + "%"
+p2 = str((timeout_counter / (total_tries * listen_tries)) * 100) + "%"
 print("Result: {}/{} ({})".format(received_counter, total_tries, p))
+print("Timeout Rate: {}/{} ({})".format(timeout_counter, (total_tries * listen_tries), p2))
