@@ -22,6 +22,7 @@ NRF24 communication for RPi (FHEM Sprinkler)
 - sudo python3 /home/pi/NRF24_Sprinkler/test_send.py
 ### Receiver (Raspberry Pi 2)
 - sudo python3 /home/pi/NRF24_Sprinkler/test_receive.py
+
 Autostart:
 - sudo nano /etc/rc.local
 - python3 /home/pi/NRF24_Sprinkler/test_receive.py &
