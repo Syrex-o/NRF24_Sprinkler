@@ -87,6 +87,6 @@ else:
     
     # reset sprinkler to false --> no callback + want to set on --> remove sprinkler block
     if command == "true":
-        os.system('perl /opt/fhem/fhem.pl 7072 "set '+sys.argv[4]+' state false"')
+        os.system('perl /opt/fhem/fhem.pl 7072 "set '+sys.argv[4]+' false"')
 
 sys.exit()
