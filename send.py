@@ -71,7 +71,6 @@ for i in range(tries):
         if arr == message:
             # callback received successful
             callback = True
-            print(arr)
             break
 
 # get relevant command --> translate command
