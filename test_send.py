@@ -15,17 +15,15 @@ radio = NRF24(GPIO, spidev.SpiDev())
 
 # initialization
 radio.begin(0, 17)
-time.sleep(1)
 radio.setRetries(15,15)
 
-radio.setPayloadSize(32)
+radio.setPayloadSize(3)
 radio.setChannel(10)
 
 radio.setDataRate(NRF24.BR_250KBPS)
 radio.setPALevel(NRF24.PA_MAX)
 
-radio.setAutoAck(1)
-radio.enableDynamicPayloads()
+radio.setAutoAck(True)
 radio.enableAckPayload()
 
 radio.openWritingPipe(pipes[0])
@@ -46,7 +44,7 @@ for i in range(total_tries):
         radio.stopListening()
         print("Test No. {}".format(i + 1))
         # sending/receiving
-        test_buff = [1, 1, 1, (i + 1)]
+        test_buff = [1, 1, (i + 1)]
 
         # multiple tries
         for t in range(listen_tries):
@@ -68,12 +66,12 @@ for i in range(total_tries):
                 else:
                         # response received
                         received_buffer = []
-                        radio.read(received_buffer, radio.getDynamicPayloadSize())
+                        radio.read(received_buffer, radio.getPayloadSize())
                         print("Received: {}".format(received_buffer))
                         radio.stopListening()
 
-                        # check length
-                        if len(received_buffer) == len(test_buff):
+                        # check if response was equal to send
+                        if received_buffer == test_buff:
                                 # count and leave loop
                                 received_counter += 1
                         break
