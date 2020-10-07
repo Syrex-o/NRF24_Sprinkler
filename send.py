@@ -53,7 +53,7 @@ for i in range(tries):
     timeout = False
 
     while (not radio.available() and (not timeout)):
-        if (millis() - s) > 10:
+        if (millis() - s) > 10: # or 20 (bigger distance)
             timeout = True
     if timeout:
         callback = False
