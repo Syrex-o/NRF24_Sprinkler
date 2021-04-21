@@ -24,7 +24,7 @@ radio = NRF24(GPIO, spidev.SpiDev())
 radio.begin(0, 17)
 radio.setRetries(15,15)
 
-radio.setChannel(10)
+radio.setChannel(100)
 
 radio.setDataRate(NRF24.BR_250KBPS)
 radio.setPALevel(NRF24.PA_MAX)
@@ -51,16 +51,17 @@ def pinOff(pin):
     global isTimerActive
     GPIO.output(pin, GPIO.HIGH)
     isTimerActive = False
-
+    
 while True:
-        while not radio.available():
-                time.sleep(1/100)
-        recv = []
-        radio.read(recv, radio.getDynamicPayloadSize())
-        radio.stopListening()
-        radio.write(recv)
-        radio.startListening()
+    while not radio.available():
+            time.sleep(1/100)
+    recv = []
+    radio.read(recv, radio.getDynamicPayloadSize())
+    radio.stopListening()
+    radio.write(recv)
+    radio.startListening()
 
+    try:
         # translate message
         arr = []
         for n in recv:
@@ -78,19 +79,28 @@ while True:
                     for pin in PINS:
                         if not GPIO.input(pin):
                             GPIO.output(pin, GPIO.HIGH)
-                    # activate
-                    GPIO.output(int(arr[0]), GPIO.LOW)
-                    secs = int("".join(arr)[2:])
 
-                    # timer
-                    if isTimerActive:
-                        t.cancel()
-                        isTimerActive = False
-                    t = Timer(secs, pinOff, [int(arr[0])])
-                    t.start()
-                    isTimerActive = True
+                    # check if time is relevant
+                    secs = int("".join(arr)[2:])
+                    if secs > 0:
+                        # activate
+                        GPIO.output(int(arr[0]), GPIO.LOW)
+
+                        # timer
+                        if isTimerActive:
+                            t.cancel()
+                            isTimerActive = False
+                        t = Timer(secs, pinOff, [int(arr[0])])
+                        t.start()
+                        isTimerActive = True
                 else:
                     # off
                     GPIO.output(int(arr[0]), GPIO.HIGH)
             # update last reply
             last_call = millis()
+    except Exception as e:
+        # secure off all
+        for pin in PINS:
+            if not GPIO.input(pin):
+                GPIO.output(pin, GPIO.HIGH)
+        pass
