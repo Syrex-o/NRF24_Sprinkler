@@ -40,6 +40,7 @@ Autostart:
 - sudo mv /home/pi/NRF24_Sprinkler /opt/fhem
 - sudo nano /etc/sudoers
 - fhem ALL=(ALL) NOPASSWD: ALL
+- telnet in FHEM definieren: define telnetPort telnet 7072 global
 
 ## Raspberry Pi No. 2 (Receiver) --> Raspberry Pi 2
 Autostart:
