@@ -46,7 +46,7 @@ fi
 echo "Installation Step: 3"
 echo "=========================="
 echo "Select Sender/Receiver"
-echo -n -e '\033[36mSender (Y) or Receiver (R) [S/R]\033[0m'
+echo -n -e '\033[36mSender (S) or Receiver (R) [S/R]\033[0m'
 
 read selectdecision
 if [[ $selectdecision =~ (S|s) ]]
