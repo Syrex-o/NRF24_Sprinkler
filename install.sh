@@ -3,8 +3,8 @@
 # Error out if anything fails.
 #set -e
 clear
-echo 'SmartSprinkler Installer'
-echo ''
+echo "SmartSprinkler Installer"
+echo ""
 sleep 3
 if [ "$(id -u)" != "0" ]; then
     echo -e "\033[1;31mRun Script as sudo./install.sh\033[0m"
@@ -63,7 +63,7 @@ if [[ $selectdecision =~ (S|s) ]]
     sudo apt update
     sudo apt install fhem
 else
-    echo 'FHEM not needed on Receiver'
+    echo "FHEM not needed on Receiver"
 fi
 
 echo "Installation Step: 4"
