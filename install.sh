@@ -2,31 +2,25 @@
 
 # Error out if anything fails.
 #set -e
-
 clear
 echo 'SmartSprinkler Installer'
 echo ''
 sleep 3
-
 if [ "$(id -u)" != "0" ]; then
     echo -e "\033[1;31mRun Script as sudo./install.sh\033[0m"
   exit 1
 fi
-
 echo "Installation Step: 1"
 echo "=========================="
 apt update
 apt -y full-upgrade
-
 # set time
 sudo timedatectl set-timezone Europe/Berlin
 sudo timedatectl set-ntp true
-
 # lang
 sudo sed -i -e 's/# de_DE.UTF-8 UTF-8/de_DE.UTF-8 UTF-8/' /etc/locale.gen 
 sudo locale-gen 
 sudo localectl set-locale LANG=de_DE.UTF-8 LANGUAGE=de_DE
-
 echo "Installation Step: 2"
 echo "Disable some settings"
 echo "=========================="
