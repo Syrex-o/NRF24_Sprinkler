@@ -1,6 +1,11 @@
 # NRF24_Sprinkler
 NRF24 communication for RPi (FHEM Sprinkler)
 
+# Quick Install:
+cd /tmp
+wget https://github.com/Syrex-o/NRF24_Sprinkler/blob/master/install.sh
+sudo bash install.sh
+
 ## General Installation
 1. enable SPI in raspi-config
 2. sudo apt-get install python3-dev -y
