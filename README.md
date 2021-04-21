@@ -46,5 +46,9 @@ Autostart:
 - sudo nano /etc/rc.local
 - python3 /home/pi/NRF24_Sprinkler/receive.py &
 
+### Schedule Reboot:
+- sudo crontab -e
+- 0 3 * * * /sbin/shutdown -r now
+
 
 ## !!! Ensure Naming is correct from old NRF24L01 to NRF24_Sprinkler
