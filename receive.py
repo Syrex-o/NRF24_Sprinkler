@@ -72,7 +72,8 @@ while True:
         # validation
         if len(arr) > 0 and int(arr[0]) in PINS:
             # validation complete --> check last call to prevent bubbles
-            if (millis() - last_call) > 100:
+            delta = millis() - last_call
+            if delta > 30:
                 # on
                 if arr[1] == '1':
                     # reset all active pins
